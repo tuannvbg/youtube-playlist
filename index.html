@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>MediaElement.js YouTube Playlist</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+      <link rel="stylesheet" type="text/css" href="/css/mediaelementplayer.css">
+      <link rel="stylesheet" type="text/css" href="/css/mejs_playlist.css">
+      <link rel="stylesheet" type="text/css" href="/css/mejs_example.css" />
+      <link rel="stylesheet" type="text/css" href="/css/mejs_share-links.css" />
+      <link rel="stylesheet" type="text/css" href="/css/mejs_quality.css" />
+      <link rel="stylesheet" type="text/css" href="/css/jquery.mThumbnailScroller.css" />
+   </head>
+   <body>
+      <div id="container">
+         <div class="media-wrapper" id="media-wrapper-container">
+            <video id="player1" width="750" height="421" controls preload="none"></video>
+         </div>
+      </div>
+      <script>
+         /** The JavaScript timer id */
+         var player_interval_id = 0;
+         
+         /** The function used to create the player */
+         function CreatePlayer()
+         {
+         	/** If the required player library has been loaded, then the JavaScript timer is stopped and the player is created */
+         	if (typeof MediaElementPlayer != 'undefined')
+         	    clearInterval(player_interval_id);
+         	/** If the player library has not been loaded, then the function returns */
+         	else return;
+         				
+         	/** The video elements are fetched */
+             var mediaElements      = document.querySelectorAll('video');
+                 
+             /** The player configuration */
+             window.youtube         = {
+                                         start: null, 
+             						    end: null, 
+             						    quality: 'default', 
+             						    is_auto_play: false, 
+             						    last_end_time: 0, 
+             						    available_qualities: null, 
+             						    is_quality_set: false,
+             						    current_url: "", 
+             						    default_poster: "/images/player-background.jpg"
+             				        };
+               		
+         	/** Indicates if video should start playing after page load */
+         	if (location.href.indexOf('#Trailer') > 0) window.youtube.is_auto_play = true;
+         
+         	/** The media player is created */			
+         	window.player = new MediaElementPlayer(mediaElements[0], {
+         			features: ['prevtrack', 'playpause', 'nexttrack', 'current', 'progress', 'duration', 'volume', 'playlist', 'shuffle', 'loop', 'fullscreen', 'quality'],
+         			youtube: {},
+         			startVolume: 1.0
+         	});
+         			
+             /** The parameters for the ajax call */
+         	var parameters = Array();
+         	/** The playlist url */
+             var url = "/sample_playlist.xml";
+             
+         	/** The xml http object is created */
+         	var xhttp = new XMLHttpRequest();
+         	xhttp.open('GET', url, true);
+         	xhttp.send();
+         	
+             /** Indicates if the state of the request has changed */
+         	xhttp.onreadystatechange = function() {
+         		if (this.readyState == 4 && this.status == 200) {
+         			/** The parser object is created */
+         			parser = new DOMParser();
+         		   	// Typical action to be performed when the document is ready:
+         		   	xmlDoc = parser.parseFromString(xhttp.responseText,'text/xml');
+         					   	
+         		   	/** The list of titles */
+         		   	var titles      = xmlDoc.getElementsByTagName('title');
+         		   	/** The list of images */
+         		   	var images      = xmlDoc.getElementsByTagName('image');
+         		   	/** The list of endtime */
+         		   	var endtimes   = xmlDoc.getElementsByTagName('endtime');
+         		   	/** The list of file sources */
+         		   	var sources     = xmlDoc.getElementsByTagName('source');
+         			/** The start time */
+         		   	var start_times = xmlDoc.getElementsByTagName('start');   				       				       				       	
+         		   	/** Each node is added to the playlist */
+         		   	for (count = 0; count < titles.length; count++) {
+         				/** The title */
+         				var title     = titles[count].childNodes[0].nodeValue;
+         				/** The images */
+         				var image     = images[count].childNodes[0].nodeValue;
+         				/** The endtime */
+         				var endtime  = endtimes[count].childNodes[0].nodeValue;
+         				/** The sources */
+         				var source    = sources[count].childNodes[0].nodeValue;
+         				/** The start time */
+         				var start     = start_times[count].childNodes[0].nodeValue;       		
+         				/** The playlist item */
+         				window.player.options.playlist.push({'image': image, 'src': source, 'endtime': endtime, 'title': title, 'start': start});
+         			}
+         			/** The player is marked as loaded */
+         			window.player.options.is_page_loaded = true;
+         			/** The playlist is built */
+         			window.player.buildplaylist(window.player, window.player.controls, window.player.layers, window.player.media);
+         
+         			/** The player is displayed */
+         			document.getElementById('player1').style.display='block';										
+         			/** The share tools are added to the player */
+         			AddVideoShareTools(window, mediaElements[0]);
+         		}		       	
+         	}
+         }
+         
+         /** The JavaScript timer for creating the player is started */
+         player_interval_id = setInterval('CreatePlayer()', 200);
+         			        	    
+      </script>
+      <script src="/js/jquery.min.js"></script>
+      <script src="/js/mejs_mediaelement-and-player.js"></script>
+      <script src="/js/jquery.mThumbnailScroller.js"></script>
+      <script src="/js/mejs_playlist.js"></script>
+      <script src="/js/mejs_share-links.js"></script>
+      <script src="/js/mejs_quality.js"></script>
+   </body>
+</html>

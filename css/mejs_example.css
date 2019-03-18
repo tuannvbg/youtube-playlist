@@ -1,0 +1,120 @@
+#container {
+    padding: 100px 200px 50px;
+    max-width: 800px;
+}
+
+.thumbnail-title {
+	color: white;
+	cursor: pointer;
+	text-align: center;
+}
+
+.thumbnail-title:hover {
+	text-decoration: underline;
+}
+
+.mTS-buttons-in .mTSButtonLeft, 
+.mTS-buttons-in .mTSButtonRight{ 
+		width: 24px;
+		height: 48px;
+		padding: 24px 4px 0 4px;
+		margin-top: -120px;
+}
+
+/*.jw-icon-hd, .jw-menu, .jw-text .jw-option .item-x .jw-active-option { display: none; }*/ 
+
+.jw-skin-beelden .jw-controlbar {
+	display: inline-block;
+	width: 100%;	
+	margin: 0;
+	bottom: .7em;
+	left: 0%;
+	right: 0%;
+}
+ 
+.ListItems div {
+	text-align: left;
+	width: 100%;
+	height: 240px;
+	text-indent: 0px;
+	background: #000000;
+	box-shadow: inset 0 3px 10px rgba(0,0,0,.85);
+	-webkit-box-shadow: inset 0 3px 10px rgba(0,0,0,.85);
+	-moz-box-shadow: inset 0 3px 10px rgba(0,0,0,.85);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	font-family: helvetica;
+	color: #000000;
+	text-decoration: none;
+	list-style-type: none;
+	list-style-position: inside;
+	padding: 0 0 0 0px;
+	overflow: hidden;
+}
+
+.ListItems div li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	list-style: none;
+	padding: 15px 0 0 11px;
+	line-height: 200%;
+}
+
+.ListItems div a {
+	text-indent: 0px;
+	display: block;
+	background: #000;
+	border: 1px solid #666;
+	height: 120px;
+	width: 144px;
+	margin: 0;
+	color: #ffffff;
+	text-decoration: none;
+	text-align: center;
+	margin: 0;
+	list-style-type: none;
+	list-style-position: inside;
+	margin: 0;
+	line-height: 200%;
+}
+
+.ListItems div a:hover {
+	list-style-type: none;
+	border: 1px solid #ff0046;
+}
+
+.content {
+	overflow: auto;
+	position: relative;
+	padding: 10px;
+	background-color: #333;
+	width: 50%;
+	height: auto;
+	float: left;
+}
+.content li {
+	margin: 4px;
+	overflow: hidden;
+}
+.content li a {
+	display: inline-block;
+    /**border: 7px solid rgba(255,255,255,.1);**/
+}
+.content.light, .content.light .mTSButton {
+	background-color: #c2beb2;
+}
+.content.light li a {
+	border: 7px solid rgba(255,255,255,.4);
+}
+
+.manage-tracklist-button-image {
+	width: 16px;
+	height: 16px;
+	border: 0;
+	vertical-align: middle;
+}
