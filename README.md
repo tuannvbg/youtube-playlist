@@ -1,4 +1,4 @@
-<p id="youtube-screen"><img src="https://pakjiddat.netlify.com/static/1f55fabadcd6a9195596f8b57476f9a8/8c557/youtube-playlist.png" alt="YouTube Playlist"/></p>
+<p id="youtube-screen"><img src="https://pakjiddat.netlify.app/static/1f55fabadcd6a9195596f8b57476f9a8/8c557/youtube-playlist.png" alt="YouTube Playlist"/></p>
 
 <h3>Introduction</h3>
 <p>The YouTube Playlist is dervied from the <a href='http://mediaelementjs.com/'>MediaElement player</a>. It allows YouTube videos to be displayed in a playlist.</p>
